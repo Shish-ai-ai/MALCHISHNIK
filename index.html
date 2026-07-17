@@ -67,6 +67,17 @@
             border-radius: 10px;
             margin-bottom: 25px;
             border: 1px solid #333;
+            background: #000;
+        }
+
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #000;
         }
 
         .video-wrapper iframe {
@@ -76,6 +87,28 @@
             width: 100%;
             height: 100%;
             border: none;
+        }
+
+        /* Стиль для ссылки-заглушки, если видео не загрузилось */
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0d0d0d;
+            color: #666;
+            font-size: 14px;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .video-placeholder .play-icon {
+            font-size: 48px;
+            color: #b8860b;
         }
 
         .letter {
@@ -147,6 +180,13 @@
             letter-spacing: 1px;
         }
 
+        .video-note {
+            text-align: center;
+            color: #555;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
         @media (max-width: 500px) {
             .container { padding: 25px 18px; }
             h1 { font-size: 22px; }
@@ -165,12 +205,27 @@
         <h1>ДАША В БЕДЕ</h1>
         <div class="subtitle">ПОСЛЕДНЯЯ ИНСТРУКЦИЯ</div>
 
-        <!-- ===== ВИДЕО ===== -->
+        <!-- ===== ВИДЕО С GOOGLE ДИСКА ===== -->
         <div class="video-wrapper">
-            <iframe 
-                src="https://youtu.be/zOJitpb9dAM" 
-                allowfullscreen>
-            </iframe>
+            <!-- ВАРИАНТ 1: ПРЯМАЯ ССЫЛКА НА ВИДЕО (MP4) -->
+            <!-- 
+                ЗАМЕНИ ID_ФАЙЛА на реальный ID твоего видео на Google Диске.
+                Как получить ID: открой видео на диске, скопируй ссылку.
+                Пример ссылки: https://drive.google.com/file/d/1ABC123DEF456/view
+                ID = 1ABC123DEF456
+            -->
+            <video controls playsinline preload="metadata">
+                <source src="https://drive.google.com/uc?export=download&id=ID_ФАЙЛА" type="video/mp4">
+                <!-- Если видео в другом формате, добавь ещё source -->
+                <div class="video-placeholder">
+                    <span class="play-icon">▶</span>
+                    <span>Видео не загрузилось</span>
+                    <span style="font-size:12px; color:#444;">Проверь ссылку на Google Диск</span>
+                </div>
+            </video>
+        </div>
+        <div class="video-note">
+            📹 Если видео не играет — <a href="https://drive.google.com/file/d/10DSed7-fMqIvrbPz5Ja-4id4GwxUfZCC/view?usp=drive_link" target="_blank" style="color:#b8860b;">скачай его</a>
         </div>
 
         <!-- ===== ПИСЬМО ОТ БАНДИТОВ ===== -->
