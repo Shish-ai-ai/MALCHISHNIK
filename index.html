@@ -59,56 +59,61 @@
             padding-bottom: 18px;
         }
 
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            border: 1px solid #333;
-            background: #000;
-        }
-
-        .video-wrapper video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-            background: #000;
-        }
-
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Стиль для ссылки-заглушки, если видео не загрузилось */
-        .video-placeholder {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .video-box {
             background: #0d0d0d;
-            color: #666;
-            font-size: 14px;
-            flex-direction: column;
-            gap: 10px;
+            border: 2px dashed #b8860b55;
+            border-radius: 12px;
+            padding: 35px 20px;
+            text-align: center;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
         }
 
-        .video-placeholder .play-icon {
-            font-size: 48px;
+        .video-box:hover {
+            border-color: #b8860b;
+            box-shadow: 0 0 30px rgba(184, 134, 11, 0.08);
+        }
+
+        .video-box .big-icon {
+            font-size: 72px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .video-box h2 {
             color: #b8860b;
+            font-size: 18px;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .video-box p {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+
+        .btn-video {
+            display: inline-block;
+            padding: 14px 40px;
+            background: #b8860b;
+            color: #0d0d0d;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Courier New', monospace;
+            text-decoration: none;
+        }
+
+        .btn-video:hover {
+            background: #d4a017;
+            transform: scale(1.05);
+            box-shadow: 0 0 25px #b8860b55;
         }
 
         .letter {
@@ -180,19 +185,13 @@
             letter-spacing: 1px;
         }
 
-        .video-note {
-            text-align: center;
-            color: #555;
-            font-size: 12px;
-            margin-top: 8px;
-        }
-
         @media (max-width: 500px) {
             .container { padding: 25px 18px; }
             h1 { font-size: 22px; }
             .phone-number { font-size: 22px; }
             .letter { font-size: 14px; padding: 15px 18px; }
             .btn { font-size: 15px; padding: 14px; }
+            .btn-video { font-size: 15px; padding: 12px 25px; }
         }
     </style>
 </head>
@@ -205,27 +204,14 @@
         <h1>ДАША В БЕДЕ</h1>
         <div class="subtitle">ПОСЛЕДНЯЯ ИНСТРУКЦИЯ</div>
 
-        <!-- ===== ВИДЕО С GOOGLE ДИСКА ===== -->
-        <div class="video-wrapper">
-            <!-- ВАРИАНТ 1: ПРЯМАЯ ССЫЛКА НА ВИДЕО (MP4) -->
-            <!-- 
-                ЗАМЕНИ ID_ФАЙЛА на реальный ID твоего видео на Google Диске.
-                Как получить ID: открой видео на диске, скопируй ссылку.
-                Пример ссылки: https://drive.google.com/file/d/1ABC123DEF456/view
-                ID = 1ABC123DEF456
-            -->
-            <video controls playsinline preload="metadata">
-                <source src="https://drive.google.com/file/d/1lJexSGN9W2flZHcvQIDddIX_MNXrHJSe/view?usp=drive_link" type="video/mp4">
-                <!-- Если видео в другом формате, добавь ещё source -->
-                <div class="video-placeholder">
-                    <span class="play-icon">▶</span>
-                    <span>Видео не загрузилось</span>
-                    <span style="font-size:12px; color:#444;">Проверь ссылку на Google Диск</span>
-                </div>
-            </video>
-        </div>
-        <div class="video-note">
-            📹 Если видео не играет — <a href="https://drive.google.com/file/d/1lJexSGN9W2flZHcvQIDddIX_MNXrHJSe/view?usp=drive_link" type="video/mp4" target="_blank" style="color:#b8860b;">скачай его</a>
+        <!-- ===== ССЫЛКА НА ВИДЕО ===== -->
+        <div class="video-box">
+            <span class="big-icon">🎬</span>
+            <h2>ВИДЕО ПОХИЩЕНИЯ</h2>
+            <p>Нажми на кнопку, чтобы посмотреть видео</p>
+            <a href="https://drive.google.com/file/d/1lJexSGN9W2flZHcvQIDddIX_MNXrHJSe/view" target="_blank" class="btn-video">
+                ▶ СМОТРЕТЬ ВИДЕО
+            </a>
         </div>
 
         <!-- ===== ПИСЬМО ОТ БАНДИТОВ ===== -->
