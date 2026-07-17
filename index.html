@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ДАША В БЕДЕ</title>
+    <title>Спаси Дашу</title>
     <style>
         * {
             margin: 0;
@@ -24,12 +24,6 @@
             0% { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000; }
             50% { text-shadow: 0 0 30px #ff0000, 0 0 60px #ff0000, 0 0 90px #cc0000; }
             100% { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000; }
-        }
-
-        @keyframes pulse-white {
-            0% { text-shadow: 0 0 10px rgba(255,255,255,0.3); }
-            50% { text-shadow: 0 0 30px rgba(255,255,255,0.5), 0 0 60px rgba(255,0,0,0.2); }
-            100% { text-shadow: 0 0 10px rgba(255,255,255,0.3); }
         }
 
         body {
@@ -168,11 +162,11 @@
         }
 
         .video-box p {
-            color: #cc8888;
+            color: #ff8888;
             font-size: 14px;
             margin-bottom: 16px;
             font-weight: bold;
-            text-shadow: 0 0 10px rgba(200, 0, 0, 0.1);
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
         }
 
         .btn-video {
@@ -230,18 +224,10 @@
             animation: pulse 1.5s infinite;
         }
 
-        .letter .bright-text {
+        .letter .small-text {
             color: #ff6666;
             font-weight: bold;
-            font-size: 15px;
-            text-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
-        }
-
-        .letter .small-text {
-            color: #ff4444;
-            font-size: 14px;
-            font-weight: bold;
-            text-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+            text-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
         }
 
         .phone-number {
@@ -307,7 +293,7 @@
             text-transform: uppercase;
             font-weight: bold;
             text-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
-            animation: pulse-white 2s infinite;
+            animation: pulse 2s infinite;
         }
 
         .blood-corner {
@@ -365,11 +351,12 @@
         <h1>ДАША В БЕДЕ</h1>
         <div class="subtitle">▸ ТЫ НЕ СПАСЁШЬ ЕЁ ◂</div>
 
+        <!-- ===== ВИДЕО С ЯНДЕКС ДИСКА ===== -->
         <div class="video-box">
             <span class="big-icon">📹</span>
             <h2>⚠ ПОСЛЕДНЕЕ ВИДЕО ⚠</h2>
             <p style="color:#ff8888; font-weight:bold; text-shadow:0 0 20px rgba(255,0,0,0.2);">Смотри. И запоминай.</p>
-            <a href="https://drive.google.com/file/d/1lJexSGN9W2flZHcvQIDddIX_MNXrHJSe/view" target="_blank" class="btn-video">
+            <a href="https://disk.yandex.ru/i/6CG21SVEvzO86Q" target="_blank" class="btn-video">
                 ▶ СМОТРЕТЬ
             </a>
         </div>
@@ -377,7 +364,7 @@
         <div class="letter">
             <strong style="color:#ff4444;">✉ ПОСЛАНИЕ ОТ НАС:</strong><br><br>
 
-            <span class="danger">ДАША У НАС.</span> Она жива. <span style="color:#ff6666; font-weight:bold; text-shadow:0 0 15px rgba(255,0,0,0.3);">Пока что.</span><br><br>
+            <span class="danger">ДАША У НАС.</span> Она жива. <span class="small-text">Пока что.</span><br><br>
 
             Ты думал, что сможешь её защитить? <span class="highlight">Ты ошибся.</span><br>
             Мы знаем, где ты живёшь. Мы знаем, где ты работаешь.<br>
