@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Спаси Дашу - Квест</title>
+    <title>Спаси Дашу</title>
     <style>
-        /* ===== ОБЩИЕ СТИЛИ ===== */
         * {
             margin: 0;
             padding: 0;
@@ -23,8 +22,7 @@
             padding: 20px;
         }
 
-        .page {
-            display: none;
+        .container {
             max-width: 700px;
             width: 100%;
             background: #1a1a1a;
@@ -32,16 +30,13 @@
             border-radius: 16px;
             padding: 40px 30px;
             box-shadow: 0 0 40px rgba(184, 134, 11, 0.15);
-            animation: fadeIn 0.5s ease;
         }
 
-        .page.active {
+        .emoji-big {
+            font-size: 56px;
+            text-align: center;
             display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            margin-bottom: 10px;
         }
 
         h1 {
@@ -50,58 +45,72 @@
             color: #b8860b;
             text-align: center;
             letter-spacing: 2px;
-            margin-bottom: 20px;
+            margin-bottom: 8px;
             text-transform: uppercase;
-            border-bottom: 1px solid #b8860b33;
-            padding-bottom: 15px;
-        }
-
-        h2 {
-            font-size: 22px;
-            color: #d4a017;
-            margin-bottom: 16px;
-            text-align: center;
         }
 
         .subtitle {
             text-align: center;
-            color: #888;
+            color: #666;
             font-size: 14px;
             margin-bottom: 25px;
             letter-spacing: 1px;
+            border-bottom: 1px solid #b8860b33;
+            padding-bottom: 18px;
         }
 
-        .content {
-            font-size: 17px;
-            line-height: 1.7;
-            color: #c0c0c0;
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
             margin-bottom: 25px;
-            white-space: pre-wrap;
+            border: 1px solid #333;
         }
 
-        .content .highlight {
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .letter {
+            background: #111;
+            border-left: 4px solid #b8860b;
+            padding: 20px 22px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            line-height: 1.8;
+            font-size: 16px;
+            color: #c0c0c0;
+        }
+
+        .letter .highlight {
             color: #b8860b;
             font-weight: bold;
         }
 
-        .content .secret {
-            color: #d4a017;
+        .letter .danger {
+            color: #ff4444;
             font-weight: bold;
-            background: #2a2a2a;
-            padding: 2px 8px;
-            border-radius: 4px;
         }
 
-        .riddle {
-            background: #111;
-            border-left: 4px solid #b8860b;
-            padding: 20px 18px;
-            margin: 20px 0;
-            font-style: italic;
-            line-height: 2;
-            color: #d0d0d0;
-            border-radius: 0 8px 8px 0;
-            font-size: 16px;
+        .phone-number {
+            display: block;
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            color: #b8860b;
+            padding: 15px;
+            background: #0d0d0d;
+            border-radius: 10px;
+            border: 1px dashed #b8860b55;
+            margin: 15px 0;
+            letter-spacing: 3px;
         }
 
         .btn {
@@ -112,7 +121,7 @@
             color: #0d0d0d;
             border: none;
             border-radius: 10px;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -120,57 +129,12 @@
             transition: all 0.3s ease;
             font-family: 'Courier New', monospace;
             text-align: center;
-            text-decoration: none;
         }
 
         .btn:hover {
             background: #d4a017;
             transform: scale(1.02);
             box-shadow: 0 0 25px #b8860b55;
-        }
-
-        .btn-secondary {
-            background: #333;
-            color: #b8860b;
-        }
-
-        .btn-secondary:hover {
-            background: #444;
-            box-shadow: 0 0 20px #b8860b33;
-        }
-
-        .hint {
-            margin-top: 15px;
-            background: #111;
-            padding: 14px 18px;
-            border-radius: 8px;
-            border: 1px dashed #555;
-            font-size: 14px;
-            color: #888;
-            text-align: center;
-            display: none;
-        }
-
-        .hint.show {
-            display: block;
-        }
-
-        .hint-btn {
-            background: none;
-            border: 1px solid #555;
-            color: #888;
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 13px;
-            font-family: 'Courier New', monospace;
-            margin-top: 8px;
-            transition: all 0.3s;
-        }
-
-        .hint-btn:hover {
-            border-color: #b8860b;
-            color: #b8860b;
         }
 
         .footer {
@@ -183,194 +147,67 @@
             letter-spacing: 1px;
         }
 
-        .emoji-big {
-            font-size: 48px;
-            text-align: center;
-            display: block;
-            margin-bottom: 15px;
-        }
-
         @media (max-width: 500px) {
-            .page { padding: 25px 18px; }
+            .container { padding: 25px 18px; }
             h1 { font-size: 22px; }
-            .content { font-size: 15px; }
-            .btn { font-size: 16px; padding: 14px; }
+            .phone-number { font-size: 22px; }
+            .letter { font-size: 14px; padding: 15px 18px; }
+            .btn { font-size: 15px; padding: 14px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ============================================ -->
-    <!-- СТРАНИЦА 1: СТАРТ                              -->
-    <!-- ============================================ -->
-    <div class="page active" id="page-start">
+    <div class="container">
+
+        <!-- ===== ЗАГОЛОВОК ===== -->
         <span class="emoji-big">🚨</span>
-        <h1>СПАСИ ДАШУ!</h1>
-        <div class="subtitle">КВЕСТ-ИНСТРУКЦИЯ</div>
-        <div class="content">
-Санёк, твоя невеста в беде. Её похитили.
+        <h1>ДАША В БЕДЕ</h1>
+        <div class="subtitle">ПОСЛЕДНЯЯ ИНСТРУКЦИЯ</div>
 
-У тебя есть шанс её спасти. Следуй инструкциям, отгадывай загадки и действуй быстро.
-
-Время пошло. Не подведи.
+        <!-- ===== ВИДЕО ===== -->
+        <div class="video-wrapper">
+            <iframe 
+                src="https://www.youtube.com/embed/ЗАМЕНИ_НА_ССЫЛКУ_ВИДЕО" 
+                allowfullscreen>
+            </iframe>
         </div>
-        <button class="btn" onclick="goTo('page-call')">НАЧАТЬ КВЕСТ</button>
-        <div class="footer">ГОТОВЬСЯ К БИТВЕ</div>
+
+        <!-- ===== ПИСЬМО ОТ БАНДИТОВ ===== -->
+        <div class="letter">
+            <strong style="color:#b8860b;">✉ ПИСЬМО ОТ ПОХИТИТЕЛЕЙ:</strong><br><br>
+
+            <span class="danger">Даша у нас.</span> Жива, пока ты выполняешь наши правила.<br><br>
+
+            Ты думал, что сможешь её защитить? <span class="highlight">Ошибся.</span><br>
+            Мы знаем, где ты живёшь. Знаем, где работаешь. Знаем всё.<br><br>
+
+            <span style="color:#b8860b;">Единственный, кто может помочь — <strong>ВАНЁК.</strong></span><br>
+            Он знает, что делать. Звони ему <span class="danger">СЕЙЧАС ЖЕ</span>.<br><br>
+
+            <span style="color:#666; font-size:14px;">Время пошло. Не подведи.</span>
+        </div>
+
+        <!-- ===== НОМЕР ТЕЛЕФОНА ===== -->
+        <div class="phone-number">
+            📞 +7 XXX XXX-XX-XX
+        </div>
+
+        <!-- ===== ИНСТРУКЦИЯ ===== -->
+        <div style="text-align:center; color:#888; font-size:15px; margin-bottom:20px;">
+            Позвони Ваньку. Скажи, что тебе прислали видео и письмо.
+        </div>
+
+        <!-- ===== КНОПКА ===== -->
+        <button class="btn" onclick="alert('Ты позвонил Ваньку! Жди его.')">
+            ✅ Я ПОЗВОНИЛ ВАНЬКУ
+        </button>
+
+        <div class="footer">
+            ⚡ ДЕЙСТВУЙ БЫСТРО • НЕ ТЕРЯЙ ВРЕМЯ ⚡
+        </div>
+
     </div>
-
-    <!-- ============================================ -->
-    <!-- СТРАНИЦА 2: ПОЗВОНИТЬ ВАНЬКУ                  -->
-    <!-- ============================================ -->
-    <div class="page" id="page-call">
-        <h1>📞 ИНСТРУКЦИЯ №1</h1>
-        <div class="content">
-Позвони <span class="highlight">Ваньку</span> по номеру:
-
-<strong style="color:#b8860b; font-size:24px; display:block; text-align:center; margin:15px 0;">+7 XXX XXX-XX-XX</strong>
-
-Скажи ему, что тебе прислали ссылку на видео похищения Даши и сайт с инструкциями.
-
-Ваня поможет тебе. Он уже в курсе.
-        </div>
-        <button class="btn" onclick="goTo('page-riddle1')">Я ПОЗВОНИЛ ВАНЬКУ</button>
-        <div class="footer">ОДИН ЗВОНОК — ВСЁ РЕШАЕТ</div>
-    </div>
-
-    <!-- ============================================ -->
-    <!-- СТРАНИЦА 3: ПЕРВАЯ ЗАГАДКА (КК)              -->
-    <!-- ============================================ -->
-    <div class="page" id="page-riddle1">
-        <h1>🍸 ИНСТРУКЦИЯ №2</h1>
-        <div class="content">
-Ваня сказал, что ему нельзя светиться. Иди в бар и найди <span class="highlight">информатора</span>.
-
-<strong>Отгадай загадку:</strong>
-        </div>
-        <div class="riddle">
-Там, где этикет в почёте,<br>
-Но без пафоса, без нот,<br>
-Где слова не тянут, короче,<br>
-Где ответ — и ты не ждёшь.<br><br>
-Подойди к тому, кто точит<br>
-Стёкла за стеклянной мглой.<br>
-Шёпот: <span class="secret">«Ламель-морель»</span> — и точка,<br>
-Дальше действуй сам, герой.
-        </div>
-        <button class="hint-btn" onclick="toggleHint('hint1')">🔍 ПОДСКАЗКА</button>
-        <div class="hint" id="hint1">Вспомни, где слова не тянут в длину. Заведение с двумя словами в названии.</div>
-        <br>
-        <button class="btn" onclick="goTo('page-riddle2')">Я НАШЁЛ ИНФОРМАТОРА</button>
-        <div class="footer">СЛОВА НЕ ТЯНУТ — ДЕЛАЙ</div>
-    </div>
-
-    <!-- ============================================ -->
-    <!-- СТРАНИЦА 4: ВТОРАЯ ЗАГАДКА (ДОМ)             -->
-    <!-- ============================================ -->
-    <div class="page" id="page-riddle2">
-        <h1>🏠 ИНСТРУКЦИЯ №3</h1>
-        <div class="content">
-Открой конверт, который дал информатор. В нём новая загадка.
-
-<strong>Отгадай загадку:</strong>
-        </div>
-        <div class="riddle">
-Дом, где первый сделан шаг,<br>
-Где на стенах детский знак,<br>
-Где ты прятал свои тайны<br>
-От чужих и от случайных.<br><br>
-Лестница в углу стоит,<br>
-Под ней сумка — груз лежит.<br>
-Забери её скорее —<br>
-Дальше путь будет виднее.
-        </div>
-        <button class="hint-btn" onclick="toggleHint('hint2')">🔍 ПОДСКАЗКА</button>
-        <div class="hint" id="hint2">Твой старый дом. Там, где ты вырос. Лестница — и под ней груз.</div>
-        <br>
-        <button class="btn" onclick="goTo('page-warning')">Я НАШЁЛ СУМКУ</button>
-        <div class="footer">ВЕРНИСЬ К ИСТОКАМ</div>
-    </div>
-
-    <!-- ============================================ -->
-    <!-- СТРАНИЦА 5: ПРЕДУПРЕЖДЕНИЕ                   -->
-    <!-- ============================================ -->
-    <div class="page" id="page-warning">
-        <span class="emoji-big">⚠️</span>
-        <h1>СРОЧНО!</h1>
-        <div class="content">
-<strong style="color:#ff4444;">Дима — КРЫСА!</strong> Он предал тебя. Никита подкупил его 30% от «сахара».
-
-Не сопротивляйся, если поймают. <span class="highlight">Ванек</span> что-то придумает.
-
-Доверяй только Ване. Действуй по обстоятельствам.
-        </div>
-        <button class="btn" onclick="goTo('page-forest')">МЕНЯ ПОЙМАЛИ</button>
-        <div class="footer">ПРЕДАТЕЛЬСТВО — ЧАСТЬ ИГРЫ</div>
-    </div>
-
-    <!-- ============================================ -->
-    <!-- СТРАНИЦА 6: ДАЧНЫЙ ЛЕС                       -->
-    <!-- ============================================ -->
-    <div class="page" id="page-forest">
-        <h1>🌲 ИНСТРУКЦИЯ №4</h1>
-        <div class="content">
-Тебя везут на дачу. Когда выйдешь из машины — <span class="highlight">беги в лес</span>.
-
-Никита даст тебе 10 секунд форы.
-
-Беги прямо, не сворачивай. <span class="highlight">Ваня</span> будет ждать на просеке.
-
-<strong style="color:#b8860b;">Верь в себя. Ты справишься.</strong>
-        </div>
-        <button class="btn" onclick="goTo('page-final')">Я ГОТОВ БЕЖАТЬ</button>
-        <div class="footer">ЛЕС — ТВОЙ СОЮЗНИК</div>
-    </div>
-
-    <!-- ============================================ -->
-    <!-- СТРАНИЦА 7: ФИНАЛ                            -->
-    <!-- ============================================ -->
-    <div class="page" id="page-final">
-        <span class="emoji-big">🏆</span>
-        <h1>ПОБЕДА!</h1>
-        <div class="content">
-<strong style="color:#b8860b; font-size:20px;">Ты прошёл школу жизни!</strong>
-
-Пудра, сахар, предатели, перестрелки... Теперь ты готов к самому главному бою — к <span class="highlight">семейной жизни</span>!
-
-<strong style="color:#4caf50;">Дашу вернут в целости и сохранности.</strong> Она даже ничего не вспомнит.
-
-А мы едем <span style="color:#b8860b; font-size:22px; display:block; text-align:center; margin:15px 0;">🍻 ПРАЗДНОВАТЬ ПОБЕДУ!</span>
-        </div>
-        <button class="btn btn-secondary" onclick="goTo('page-start')">ПРОЙТИ СНОВА</button>
-        <div class="footer">ТЫ ГЕРОЙ, САНЁК!</div>
-    </div>
-
-    <!-- ============================================ -->
-    <!-- СКРИПТ                                       -->
-    <!-- ============================================ -->
-    <script>
-        // Переключение страниц
-        function goTo(pageId) {
-            // Скрыть все страницы
-            document.querySelectorAll('.page').forEach(p => {
-                p.classList.remove('active');
-            });
-            // Показать нужную
-            const target = document.getElementById(pageId);
-            if (target) {
-                target.classList.add('active');
-                // Прокрутить вверх
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
-
-        // Показать/скрыть подсказку
-        function toggleHint(hintId) {
-            const hint = document.getElementById(hintId);
-            if (hint) {
-                hint.classList.toggle('show');
-            }
-        }
-    </script>
 
 </body>
 </html>
