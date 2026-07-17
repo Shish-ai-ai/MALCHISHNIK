@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Спаси Дашу</title>
+    <title>ДАША В БЕДЕ</title>
     <style>
         * {
             margin: 0;
@@ -11,154 +11,273 @@
             box-sizing: border-box;
         }
 
+        @keyframes flicker {
+            0% { opacity: 1; }
+            5% { opacity: 0.7; }
+            10% { opacity: 1; }
+            15% { opacity: 0.5; }
+            20% { opacity: 1; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000; }
+            50% { text-shadow: 0 0 30px #ff0000, 0 0 60px #ff0000, 0 0 90px #cc0000; }
+            100% { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000; }
+        }
+
+        @keyframes pulse-white {
+            0% { text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+            50% { text-shadow: 0 0 30px rgba(255,255,255,0.5), 0 0 60px rgba(255,0,0,0.2); }
+            100% { text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+        }
+
         body {
             font-family: 'Courier New', monospace;
-            background: #0d0d0d;
-            color: #e0e0e0;
+            background: #0a0000;
+            color: #cc0000;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            background-image: 
+                radial-gradient(ellipse at 10% 20%, rgba(100, 0, 0, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 90% 80%, rgba(100, 0, 0, 0.2) 0%, transparent 50%);
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(255, 0, 0, 0.02) 2px,
+                    rgba(255, 0, 0, 0.02) 4px
+                );
+            pointer-events: none;
+            z-index: 0;
         }
 
         .container {
             max-width: 700px;
             width: 100%;
-            background: #1a1a1a;
-            border: 2px solid #b8860b;
-            border-radius: 16px;
+            background: #0d0000;
+            border: 3px solid #cc0000;
+            border-radius: 12px;
             padding: 40px 30px;
-            box-shadow: 0 0 40px rgba(184, 134, 11, 0.15);
+            box-shadow: 
+                0 0 60px rgba(200, 0, 0, 0.2),
+                inset 0 0 60px rgba(200, 0, 0, 0.05);
+            position: relative;
+            z-index: 1;
+            animation: flicker 4s infinite;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border: 2px solid rgba(200, 0, 0, 0.2);
+            border-radius: 14px;
+            pointer-events: none;
+        }
+
+        .container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(180deg, transparent 70%, rgba(100, 0, 0, 0.05) 100%),
+                linear-gradient(90deg, transparent 80%, rgba(100, 0, 0, 0.05) 100%);
+            pointer-events: none;
+            border-radius: 12px;
         }
 
         .emoji-big {
-            font-size: 56px;
+            font-size: 64px;
             text-align: center;
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
+            animation: pulse 2s infinite;
         }
 
         h1 {
-            font-size: 28px;
-            font-weight: 700;
-            color: #b8860b;
+            font-size: 32px;
+            font-weight: 900;
+            color: #ff0000;
             text-align: center;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
+            letter-spacing: 4px;
+            margin-bottom: 5px;
             text-transform: uppercase;
+            animation: pulse 2s infinite;
+            text-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
         }
 
         .subtitle {
             text-align: center;
-            color: #666;
-            font-size: 14px;
+            color: #883333;
+            font-size: 13px;
             margin-bottom: 25px;
-            letter-spacing: 1px;
-            border-bottom: 1px solid #b8860b33;
-            padding-bottom: 18px;
+            letter-spacing: 3px;
+            border-bottom: 1px solid #330000;
+            padding-bottom: 15px;
+            text-transform: uppercase;
         }
 
         .video-box {
-            background: #0d0d0d;
-            border: 2px dashed #b8860b55;
-            border-radius: 12px;
-            padding: 35px 20px;
+            background: #050000;
+            border: 2px solid #660000;
+            border-radius: 10px;
+            padding: 30px 20px;
             text-align: center;
             margin-bottom: 25px;
             transition: all 0.3s ease;
+            box-shadow: inset 0 0 40px rgba(100, 0, 0, 0.1);
         }
 
         .video-box:hover {
-            border-color: #b8860b;
-            box-shadow: 0 0 30px rgba(184, 134, 11, 0.08);
+            border-color: #cc0000;
+            box-shadow: 0 0 40px rgba(200, 0, 0, 0.15), inset 0 0 40px rgba(100, 0, 0, 0.1);
         }
 
         .video-box .big-icon {
             font-size: 72px;
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .video-box h2 {
-            color: #b8860b;
-            font-size: 18px;
-            margin-bottom: 8px;
-            letter-spacing: 1px;
+            color: #cc0000;
+            font-size: 17px;
+            margin-bottom: 6px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(200, 0, 0, 0.3);
         }
 
         .video-box p {
-            color: #888;
+            color: #cc8888;
             font-size: 14px;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(200, 0, 0, 0.1);
         }
 
         .btn-video {
             display: inline-block;
             padding: 14px 40px;
-            background: #b8860b;
-            color: #0d0d0d;
-            border: none;
-            border-radius: 10px;
+            background: #1a0000;
+            color: #ff0000;
+            border: 2px solid #660000;
+            border-radius: 8px;
             font-size: 18px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: 'Courier New', monospace;
             text-decoration: none;
+            box-shadow: 0 0 30px rgba(200, 0, 0, 0.1);
         }
 
         .btn-video:hover {
-            background: #d4a017;
+            background: #2a0000;
+            border-color: #cc0000;
             transform: scale(1.05);
-            box-shadow: 0 0 25px #b8860b55;
+            box-shadow: 0 0 50px rgba(200, 0, 0, 0.25);
         }
 
         .letter {
-            background: #111;
-            border-left: 4px solid #b8860b;
+            background: #080000;
+            border-left: 4px solid #cc0000;
             padding: 20px 22px;
             margin: 20px 0;
-            border-radius: 0 8px 8px 0;
-            line-height: 1.8;
+            border-radius: 0 6px 6px 0;
+            line-height: 1.9;
             font-size: 16px;
-            color: #c0c0c0;
+            color: #dd9999;
+            box-shadow: inset 0 0 30px rgba(100, 0, 0, 0.05);
+        }
+
+        .letter strong {
+            color: #ff4444;
         }
 
         .letter .highlight {
-            color: #b8860b;
+            color: #ff4444;
             font-weight: bold;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
         }
 
         .letter .danger {
-            color: #ff4444;
+            color: #ff0000;
             font-weight: bold;
+            font-size: 18px;
+            text-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
+            animation: pulse 1.5s infinite;
+        }
+
+        .letter .bright-text {
+            color: #ff6666;
+            font-weight: bold;
+            font-size: 15px;
+            text-shadow: 0 0 15px rgba(255, 0, 0, 0.2);
+        }
+
+        .letter .small-text {
+            color: #ff4444;
+            font-size: 14px;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
         }
 
         .phone-number {
             display: block;
             text-align: center;
-            font-size: 28px;
+            font-size: 30px;
             font-weight: 700;
-            color: #b8860b;
+            color: #ff0000;
             padding: 15px;
-            background: #0d0d0d;
-            border-radius: 10px;
-            border: 1px dashed #b8860b55;
+            background: #050000;
+            border-radius: 8px;
+            border: 1px dashed #660000;
             margin: 15px 0;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
+            text-shadow: 0 0 30px rgba(255, 0, 0, 0.2);
+        }
+
+        .instruction-text {
+            text-align: center;
+            color: #ff8888;
+            font-size: 15px;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            text-shadow: 0 0 15px rgba(255, 0, 0, 0.15);
         }
 
         .btn {
             display: block;
             width: 100%;
             padding: 16px;
-            background: #b8860b;
-            color: #0d0d0d;
-            border: none;
-            border-radius: 10px;
+            background: #1a0000;
+            color: #cc0000;
+            border: 2px solid #660000;
+            border-radius: 8px;
             font-size: 18px;
             font-weight: 700;
             text-transform: uppercase;
@@ -167,85 +286,123 @@
             transition: all 0.3s ease;
             font-family: 'Courier New', monospace;
             text-align: center;
+            box-shadow: 0 0 20px rgba(200, 0, 0, 0.05);
         }
 
         .btn:hover {
-            background: #d4a017;
+            background: #2a0000;
+            border-color: #cc0000;
             transform: scale(1.02);
-            box-shadow: 0 0 25px #b8860b55;
+            box-shadow: 0 0 40px rgba(200, 0, 0, 0.15);
         }
 
         .footer {
             text-align: center;
-            font-size: 12px;
-            color: #444;
+            font-size: 14px;
+            color: #ff5555;
             margin-top: 25px;
-            border-top: 1px solid #222;
+            border-top: 1px solid #330000;
             padding-top: 18px;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: bold;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+            animation: pulse-white 2s infinite;
+        }
+
+        .blood-corner {
+            position: absolute;
+            font-size: 28px;
+            color: #660000;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .blood-corner.tl { top: 8px; left: 12px; }
+        .blood-corner.tr { top: 8px; right: 12px; }
+        .blood-corner.bl { bottom: 8px; left: 12px; }
+        .blood-corner.br { bottom: 8px; right: 12px; }
+
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 300px 300px;
         }
 
         @media (max-width: 500px) {
             .container { padding: 25px 18px; }
-            h1 { font-size: 22px; }
+            h1 { font-size: 24px; letter-spacing: 2px; }
             .phone-number { font-size: 22px; }
             .letter { font-size: 14px; padding: 15px 18px; }
             .btn { font-size: 15px; padding: 14px; }
             .btn-video { font-size: 15px; padding: 12px 25px; }
+            .emoji-big { font-size: 48px; }
+            .footer { font-size: 12px; }
+            .instruction-text { font-size: 13px; }
         }
     </style>
 </head>
 <body>
 
+    <div class="noise"></div>
+
     <div class="container">
 
-        <!-- ===== ЗАГОЛОВОК ===== -->
-        <span class="emoji-big">🚨</span>
-        <h1>ДАША В БЕДЕ</h1>
-        <div class="subtitle">ПОСЛЕДНЯЯ ИНСТРУКЦИЯ</div>
+        <span class="blood-corner tl">💀</span>
+        <span class="blood-corner tr">💀</span>
+        <span class="blood-corner bl">💀</span>
+        <span class="blood-corner br">💀</span>
 
-        <!-- ===== ССЫЛКА НА ВИДЕО ===== -->
+        <span class="emoji-big">🩸</span>
+        <h1>ДАША В БЕДЕ</h1>
+        <div class="subtitle">▸ ТЫ НЕ СПАСЁШЬ ЕЁ ◂</div>
+
         <div class="video-box">
-            <span class="big-icon">🎬</span>
-            <h2>ВИДЕО ПОХИЩЕНИЯ</h2>
-            <p>Нажми на кнопку, чтобы посмотреть видео</p>
+            <span class="big-icon">📹</span>
+            <h2>⚠ ПОСЛЕДНЕЕ ВИДЕО ⚠</h2>
+            <p style="color:#ff8888; font-weight:bold; text-shadow:0 0 20px rgba(255,0,0,0.2);">Смотри. И запоминай.</p>
             <a href="https://drive.google.com/file/d/1lJexSGN9W2flZHcvQIDddIX_MNXrHJSe/view" target="_blank" class="btn-video">
-                ▶ СМОТРЕТЬ ВИДЕО
+                ▶ СМОТРЕТЬ
             </a>
         </div>
 
-        <!-- ===== ПИСЬМО ОТ БАНДИТОВ ===== -->
         <div class="letter">
-            <strong style="color:#b8860b;">✉ ПИСЬМО ОТ ПОХИТИТЕЛЕЙ:</strong><br><br>
+            <strong style="color:#ff4444;">✉ ПОСЛАНИЕ ОТ НАС:</strong><br><br>
 
-            <span class="danger">Даша у нас.</span> Жива, пока ты выполняешь наши правила.<br><br>
+            <span class="danger">ДАША У НАС.</span> Она жива. <span style="color:#ff6666; font-weight:bold; text-shadow:0 0 15px rgba(255,0,0,0.3);">Пока что.</span><br><br>
 
-            Ты думал, что сможешь её защитить? <span class="highlight">Ошибся.</span><br>
-            Мы знаем, где ты живёшь. Знаем, где работаешь. Знаем всё.<br><br>
+            Ты думал, что сможешь её защитить? <span class="highlight">Ты ошибся.</span><br>
+            Мы знаем, где ты живёшь. Мы знаем, где ты работаешь.<br>
+            Мы знаем всё.<br><br>
 
-            <span style="color:#b8860b;">Единственный, кто может помочь — <strong>ВАНЁК.</strong></span><br>
+            <span style="color:#ff6666; font-weight:bold;">Единственный, кто может помочь — <strong style="color:#ff0000;">ВАНЁК.</strong></span><br>
             Он знает, что делать. Звони ему <span class="danger">СЕЙЧАС ЖЕ</span>.<br><br>
 
-            <span style="color:#666; font-size:14px;">Время пошло. Не подведи.</span>
+            <span style="color:#ff6666; font-weight:bold; font-size:15px; text-shadow:0 0 15px rgba(255,0,0,0.2);">Время пошло. Не подведи её.</span>
         </div>
 
-        <!-- ===== НОМЕР ТЕЛЕФОНА ===== -->
         <div class="phone-number">
-            📞 +7 919 242-07-50
+            ☎ +7 919 242-07-50
         </div>
 
-        <!-- ===== ИНСТРУКЦИЯ ===== -->
-        <div style="text-align:center; color:#888; font-size:15px; margin-bottom:20px;">
-            Позвони Ваньку. Скажи, что тебе прислали видео и письмо.
+        <div class="instruction-text">
+            позвони ваньку. скажи, что тебе прислали видео
         </div>
 
-        <!-- ===== КНОПКА ===== -->
-        <button class="btn" onclick="alert('Ты позвонил Ваньку! Жди его.')">
-            ✅ Я ПОЗВОНИЛ ВАНЬКУ
+        <button class="btn" onclick="alert('ТЫ ПОЗВОНИЛ ВАНЬКУ. ОН ЕДЕТ.')">
+            Я ПОЗВОНИЛ ВАНЬКУ
         </button>
 
         <div class="footer">
-            ⚡ ДЕЙСТВУЙ БЫСТРО • НЕ ТЕРЯЙ ВРЕМЯ ⚡
+            ⚡ ВРЕМЯ ИСТЕКАЕТ • ТЫ СЛЕДУЮЩИЙ ⚡
         </div>
 
     </div>
